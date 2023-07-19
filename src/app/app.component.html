@@ -1,0 +1,71 @@
+<main>
+  <header>
+    <h1>{{ title }}</h1>
+    <h2>Your current emerald account balance is:</h2>
+    <h2 class="current-balance">{{ currentBalance }}$</h2>
+  </header>
+
+  <div class="container">
+    <input type="text" #campaignName />
+    <label for="campaignName">campaign name</label>
+    <input type="text" #keywords />
+    <label for="campaignName">keywords</label>
+    <input type="number" min="10" #bidAmount />
+    <label for="campaignName">bid amount</label>
+    <input type="number" #campaignFund />
+    <label for="campaignName">campaign fund</label>
+    <div class="checkbox-wrapper">
+      <input class="checkbox" type="checkbox" #status />
+      <label for="status" class="status">status</label>
+    </div>
+    <select #town>
+      <option value="cracow">Cracow</option>
+      <option value="warsaw">Warsaw</option>
+      <option value="gdansk">Gdansk</option>
+      <option value="poznan">Poznan</option>
+      <option value="katowice">Katowice</option>
+    </select>
+    <input type="number" #radius />
+    <label for="campaignName">radius</label>
+    <br />
+    <button
+      class="confirm-btn"
+      type="submit"
+      (click)="
+        addTask(
+          campaignName.value,
+          keywords.value,
+          bidAmount.value,
+          campaignFund.value,
+          status.checked,
+          town.value,
+          radius.value
+        )
+      "
+    >
+      Confirm
+    </button>
+  </div>
+
+  <div class="ul-wrapper">
+    <ul *ngFor="let item of list">
+      <li class="li-name">
+        {{ item.campaignName }}
+      </li>
+      <li class="li-item">keywords: {{ item.keywords }}</li>
+      <li class="li-item">bid amount: {{ item.bidAmount }}</li>
+      <li class="li-item">funds used: {{ item.campaignFund }}</li>
+      <li class="li-item">status: {{ item.status }}</li>
+      <li class="li-item">town: {{ item.town }}</li>
+      <li class="li-item">radius: {{ item.radius }} km</li>
+      <div class="control-btns">
+        <Button class="button edit-btn" (click)="editTask(item.id)"
+          >Edit</Button
+        >
+        <Button class="button remove-btn" (click)="removeTask(item.id)"
+          >Remove</Button
+        >
+      </div>
+    </ul>
+  </div>
+</main>
